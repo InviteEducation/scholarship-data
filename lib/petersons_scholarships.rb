@@ -30,7 +30,7 @@ class PetersonsScholarships
   def self.import_table(filename)
     hash = {}
     puts "Importing #{filename}"
-    CSV.foreach("data/petersons_scholarships/#{filename}", col_sep: "\t",  headers: true, encoding: 'iso-8859-1:UTF-8') do |row|
+    CSV.foreach("scholarship-data/data/petersons_scholarships/#{filename}", col_sep: "\t",  headers: true, encoding: 'iso-8859-1:UTF-8') do |row|
       hash[row[0]] = row[1]
     end
     hash
