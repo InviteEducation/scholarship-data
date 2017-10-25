@@ -104,7 +104,7 @@ class PetersonsScholarships
         donor_name: string('donor_name'),
         donor_description: string('donor_desc')
       }
-    }.map{|filename, fields| {csv: CSV.open("data/petersons_scholarships/#{filename}", headers: true, encoding: 'iso-8859-1:UTF-8').each, fields: fields}}
+    }.map{|filename, fields| {csv: CSV.open("scholarship-data/data/petersons_scholarships/#{filename}", headers: true, encoding: 'iso-8859-1:UTF-8').each, fields: fields}}
 
     ids = Set.new
     begin
