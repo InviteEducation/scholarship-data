@@ -157,7 +157,15 @@ class PetersonsScholarships
   end
 
   def month_day(month_field, day_field)
-    Petersons.month_day month_field.to_s.upcase, day_field.to_s.upcase
+    month_column = month_field.to_s.upcase
+    day_column = day_field.to_s.upcase
+    lambda do |row|
+      month = row[month_column.to_s]
+      day = row[day_column.to_s]
+      if month and day
+        [month, day].map { |part| part.rjust(2, '0') }.join('-')
+      end
+    end
   end
 
   def flag(field)
