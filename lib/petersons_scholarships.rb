@@ -6,6 +6,7 @@ class PetersonsScholarships
   @@tables = {}
 
   def self.import
+    PetersonsScholarships.parse_tables
     ps = PetersonsScholarships.new
     ps.import_core
   end
@@ -30,7 +31,7 @@ class PetersonsScholarships
   def self.import_table(filename)
     hash = {}
     puts "Importing #{filename}"
-    CSV.foreach("scholarship-data/data/petersons_scholarships/#{filename}", col_sep: "\t",  headers: true, encoding: 'iso-8859-1:UTF-8') do |row|
+    CSV.foreach("#{File.expand_path File.dirname(__FILE__)}/../data/petersons_scholarships/#{filename}", col_sep: "\t",  headers: true, encoding: 'iso-8859-1:UTF-8') do |row|
       hash[row[0]] = row[1]
     end
     hash
@@ -104,7 +105,7 @@ class PetersonsScholarships
         donor_name: string('donor_name'),
         donor_description: string('donor_desc')
       }
-    }.map{|filename, fields| {csv: CSV.open("scholarship-data/data/petersons_scholarships/#{filename}", headers: true, encoding: 'iso-8859-1:UTF-8').each, fields: fields}}
+    }.map{ |filename, fields| {csv: CSV.open("#{File.expand_path File.dirname(__FILE__)}/../data/petersons_scholarships/#{filename}", headers: true, encoding: 'iso-8859-1:UTF-8').each, fields: fields} }
 
     ids = Set.new
     begin
