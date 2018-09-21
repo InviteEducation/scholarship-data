@@ -1,7 +1,7 @@
 require 'csv'
 
 class PetersonsScholarships
-  YEAR = 2017
+  YEAR = 2018
 
   @@tables = {}
 
